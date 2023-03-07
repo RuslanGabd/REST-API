@@ -28,12 +28,6 @@ public class SpecModel {
             .expectBody("token", notNullValue())
             .build();
 
-    public static ResponseSpecification loginResponseSpec400 = new ResponseSpecBuilder()
-            .log(STATUS)
-            .log(BODY)
-            .expectStatusCode(400)
-            .expectBody("token", notNullValue())
-            .build();
 
     public static ResponseSpecification loginResponseSpecError = new ResponseSpecBuilder()
             .log(STATUS)

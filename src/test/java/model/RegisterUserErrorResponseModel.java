@@ -6,6 +6,5 @@ import lombok.Data;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class RegisterUserErrorResponseModel {
-
     String Error;
 }

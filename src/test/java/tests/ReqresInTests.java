@@ -1,9 +1,12 @@
 package tests;
 
+import lombok.Lombok;
 import model.UpdateResponseModel;
 import model.*;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
 import static io.qameta.allure.Allure.step;
@@ -12,6 +15,7 @@ import static scpecifications.SpecModel.*;
 
 public class ReqresInTests {
 
+    @Tag("Lombok")
     @Test
     void loginTest() {
 
@@ -32,7 +36,7 @@ public class ReqresInTests {
 
 
     }
-
+    @Tag("Lombok")
     @DisplayName("Registration user")
     @Test
     void userRegister() {
@@ -57,7 +61,7 @@ public class ReqresInTests {
 
     }
 
-
+    @Tag("Lombok")
     @DisplayName("Registration  undefined user")
     @Test
     void registerUndefinedUser() {
@@ -81,7 +85,7 @@ public class ReqresInTests {
 
     }
 
-
+    @Tag("Lombok")
     @DisplayName("Update user's information")
     @Test
     void editUser() {
@@ -104,7 +108,7 @@ public class ReqresInTests {
         assertThat(responseModel.getName()).isEqualTo("morpheus");
         assertThat(responseModel.getJob()).isEqualTo("zion resident");
     }
-
+    @Tag("Lombok")
     @DisplayName("Delete")
     @Test
     public void delete() {

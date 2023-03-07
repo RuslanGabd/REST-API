@@ -33,22 +33,20 @@ dependencies {
             "io.qameta.allure:allure-rest-assured:$allureVersion",
             'io.rest-assured:rest-assured:4.1.2',
             'ch.qos.logback:logback-classic:1.2.3',
-            'org.assertj:assertj-core:3.24.2')
+            'org.assertj:assertj-core:3.24.2'
+    )
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 }
-tasks.withType(Test) {
-    useJUnitPlatform()
+
+test {
     systemProperties(System.getProperties())
-    testLogging {
-        lifecycle {
-            events "started", "skipped", "failed", "standard_error", "standard_out"
-            exceptionFormat "short"
-        }
-    }
+    useJUnitPlatform()
+
 }
 
 task api_tests(type: Test) {
     useJUnitPlatform {
-        includeTags ("api")
+        includeTags("Lombok")
     }
+    systemProperties(System.getProperties())
 }

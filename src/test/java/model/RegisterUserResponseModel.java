@@ -6,8 +6,6 @@ import lombok.Data;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class RegisterUserResponseModel {
-
     String token;
     int id;
-
 }

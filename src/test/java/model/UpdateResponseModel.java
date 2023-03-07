@@ -6,8 +6,5 @@ import lombok.Data;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UpdateResponseModel {
-
-    String  name, job;
-
-
+    String name, job;
 }
