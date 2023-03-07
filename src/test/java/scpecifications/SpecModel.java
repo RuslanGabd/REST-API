@@ -13,13 +13,13 @@ import static org.hamcrest.Matchers.notNullValue;
 
 public class SpecModel {
     public static RequestSpecification loginRequestSpec = with()
-            .filter(withCustomTemplates())
             .log().uri()
             .log().headers()
             .log().body()
             .contentType(JSON)
             .baseUri("https://reqres.in")
-            .basePath("/api");
+            .basePath("/api")
+            .filter(withCustomTemplates());
 
     public static ResponseSpecification loginResponseSpec200 = new ResponseSpecBuilder()
             .log(STATUS)
