@@ -26,7 +26,7 @@ public class ReqresInTests {
         requestModel.setEmail("eve.holt@reqres.in");
         requestModel.setPassword("cityslicka");
         RegisterUserResponseModel responseModel =
-                step("Login to website successful", () ->
+                step("Login to website", () ->
                         given(loginRequestSpec)
                                 .body(requestModel)
                                 .when()
@@ -34,7 +34,7 @@ public class ReqresInTests {
                                 .then()
                                 .spec(loginResponseSpec200)
                                 .extract().as(RegisterUserResponseModel.class));
-        step("Checking that the place of work has been edited", () -> {
+        step("Checking login to website successful", () -> {
             assertThat(responseModel.getToken()).isEqualTo("QpwL5tke4Pnpja7X4");
         });
     }
