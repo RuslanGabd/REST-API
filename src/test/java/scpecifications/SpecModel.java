@@ -17,15 +17,14 @@ public class SpecModel {
             .log().headers()
             .log().body()
             .contentType(JSON)
+            .filter(withCustomTemplates())
             .baseUri("https://reqres.in")
-            .basePath("/api")
-            .filter(withCustomTemplates());
+            .basePath("/api");
 
     public static ResponseSpecification loginResponseSpec200 = new ResponseSpecBuilder()
             .log(STATUS)
             .log(BODY)
             .expectStatusCode(200)
-            .expectBody("token", notNullValue())
             .build();
 
 
@@ -33,6 +32,12 @@ public class SpecModel {
             .log(STATUS)
             .log(BODY)
             .expectStatusCode(400)
+            .build();
+
+    public static ResponseSpecification loginResponseSpec204 = new ResponseSpecBuilder()
+            .log(STATUS)
+            .log(BODY)
+            .expectStatusCode(204)
             .build();
 
 }

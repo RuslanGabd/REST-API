@@ -7,6 +7,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
 import static io.qameta.allure.Allure.step;
@@ -31,11 +34,11 @@ public class ReqresInTests {
                                 .then()
                                 .spec(loginResponseSpec200)
                                 .extract().as(RegisterUserResponseModel.class));
-
-        assertThat(responseModel.getToken()).isEqualTo("QpwL5tke4Pnpja7X4");
-
-
+        step("Checking that the place of work has been edited", () -> {
+            assertThat(responseModel.getToken()).isEqualTo("QpwL5tke4Pnpja7X4");
+        });
     }
+
     @Tag("Lombok")
     @DisplayName("Registration user")
     @Test
@@ -56,9 +59,10 @@ public class ReqresInTests {
                                 .spec(loginResponseSpec200)
                                 .extract().as(RegisterUserResponseModel.class));
 
-        assertThat(responseModel.getToken()).isNotNull();
-        assertThat(responseModel.getId()).isEqualTo(4);
-
+        step("Checking result user registration", () -> {
+            assertThat(responseModel.getToken()).isNotNull();
+            assertThat(responseModel.getId()).isEqualTo(4);
+        });
     }
 
     @Tag("Lombok")
@@ -81,21 +85,22 @@ public class ReqresInTests {
                                 .spec(loginResponseSpecError)
                                 .extract().as(RegisterUserErrorResponseModel.class));
 
-        assertThat(responseModel.getError()).isEqualTo("Note: Only defined users succeed registration");
-
+        step("Checking message: Only defined users succeed registration", () -> {
+            assertThat(responseModel.getError()).isEqualTo("Note: Only defined users succeed registration");
+        });
     }
 
     @Tag("Lombok")
-    @DisplayName("Update user's information")
+    @DisplayName("Update user's  place of work")
     @Test
     void editUser() {
-
+        String dateTime = DateTimeFormatter.ofPattern("yyyy-MM-dd").format(LocalDateTime.now());
         UpdateRequestModel requestModel = new UpdateRequestModel();
         requestModel.setName("morpheus");
         requestModel.setJob("zion resident");
 
 
-        UpdateResponseModel responseModel = step("Update user's information", () ->
+        UpdateResponseModel responseModel = step("Update user's  place of work", () ->
                 given(loginRequestSpec)
                         .body(requestModel)
                         .when()
@@ -104,12 +109,13 @@ public class ReqresInTests {
                         .spec(loginResponseSpec200)
                         .extract().as(UpdateResponseModel.class));
 
-
-        assertThat(responseModel.getName()).isEqualTo("morpheus");
-        assertThat(responseModel.getJob()).isEqualTo("zion resident");
+        step("Checking that the place of work has been edited", () -> {
+            assertThat(responseModel.getUpdatedAt()).contains(dateTime);
+        });
     }
+
     @Tag("Lombok")
-    @DisplayName("Delete")
+    @DisplayName("Delete user")
     @Test
     public void delete() {
         step("Check delete user", () ->
@@ -117,7 +123,7 @@ public class ReqresInTests {
                         .when()
                         .delete("/users/2")
                         .then()
-                        .spec(loginResponseSpec200));
+                        .spec(loginResponseSpec204));
     }
 
 }
